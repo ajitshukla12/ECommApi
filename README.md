@@ -1,4 +1,4 @@
-# bookstore project
+# bookstore project and API
 This is a very simple bookstore website built with Django.The website displays products. Users can add and remove products to/from their cart while also specifying the quantity of each item
 
 ## Setting Up and Running Your Django Project
