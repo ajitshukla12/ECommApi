@@ -1,0 +1,97 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+     <div class="row">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+	
+				<form method="POST">
+					{% csrf_token %}
+					<div id="user-info">
+						<hr>
+						<h4>Shipping Details:</h4>
+						<hr>
+		
+						<div class="form-field">
+							<input class="form-control" type="text" name="address" placeholder="Address..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="city" placeholder="City..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="state" placeholder="State..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+						</div>
+					</div>
+				
+					<hr>
+					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Submit">
+					
+					<br>
+
+					{% if user_default_address %}
+					<h4>Default Address</h4>
+					<p>{{ user_default_address.address }}</p>
+					<p>{{ user_default_address.city }}, {{ user_default_address.state }}, {{ user_default_address.zipcode }}</p>
+					<input type="checkbox" name="use_default_address" id="useDefaultAddress"> Use Default Address
+					{% endif %}
+				<br>
+				<br>
+				<a href="{% url 'process_payment' %}" class="btn btn-success" id="proceedToPayBtn" disabled>Proceed to Pay</a>
+			</form>
+ 
+			</div>		
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box-element">
+				<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+				{% for item in cart_items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>${{item.product.price|floatformat:2}}</p></div>
+					<div style="flex:1"><p>{{item.quantity}}</p></div>
+				</div>
+				{% endfor %}
+				<!-- <h5>Items:   {{order.get_cart_items}}</h5> -->
+				<h5>Total:   ${{cart_total|floatformat:2}}</h5>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		// Disable the button initially
+		$('#proceedToPayBtn').prop('disabled', true);
+	
+		// Enable/disable button based on form validity
+		$('form').on('input', function() {
+			var isFormValid = this.checkValidity(); // Check if the form is valid
+	
+			if (isFormValid) {
+				$('#proceedToPayBtn').prop('disabled', false);
+			} else {
+				$('#proceedToPayBtn').prop('disabled', true);
+			}
+		});
+	});
+	</script>
+
+
+
+	
+{% endblock content %}
+
+
+
