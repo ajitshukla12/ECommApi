@@ -101,6 +101,23 @@
                         </strong>
                     </a>
                 </li>
+
+               <!-- Add a dropdown wrapper with the "dropdown" class -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-sign-out-alt"></i> ViewApi
+                </a>
+
+                <!-- Add a dropdown menu with the "dropdown-menu" class -->
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <!-- Add additional dropdown links here -->
+                    <a class="dropdown-item" href="{% url 'your-model-list-create' %}">BookApi</a>
+                    <a class="dropdown-item" href="{% url 'quantity' %}">BookQunatityApi</a>
+
+                </div>
+            </li>
+
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">
                         <i class="fas fa-sign-out-alt"></i> Logout

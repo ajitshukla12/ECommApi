@@ -16,3 +16,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+class QuantitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['name','quantity','price']
